@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>VP-LV</title>
+  <script src="https://d3js.org/d3.v3.min.js"></script>
+</head>
+<body>
+<style>
+    .node circle {
+        fill: #fff;
+        stroke: steelblue;
+        stroke-width: 1.5px;
+    }
+    .node {
+        font: 10px sans-serif;
+    }
+    .link {
+        fill: none;
+        stroke: #ccc;
+        stroke-width: 1.5px;
+    }
+</style>
+<script>
+    var show = true;
+    var data = {
+        "name": "flare",
+        "children": [
+            {
+            "name": "analytics",
+            "children": [
+                {
+                    "name": "cluster",
+                    "children": [
+                        {"name": "AgglomerativeCluster", "size": 3938},
+                        {"name": "CommunityStructure", "size": 3812},
+                        {"name": "MergeEdge", "size": 743}
+                    ]
+                },
+                { "name": "graph",
+                    "children": [
+                        {"name": "BetweennessCentrality", "size": 3534},
+                        {"name": "LinkDistance", "size": 5731}
+                    ]
+                }
+                ]
+            }
+        ]
+        };
+    
+    var width = 500;
+    var height = 500;
+
+    var outerRadius = 200;
+    var innerRadius = 150;
+    var color = d3.scale.category20();
+
+    var svg = d3.select("body").append("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .append("g")
+      .attr("transform", "translate(40,0)");
+
+    var cluster = d3.layout.cluster()
+      .size([height, width - 160]);
+    var diagonal = d3.svg.diagonal()
+      .projection(function(d) { return [d.y, d.x]; });
+    <!-- console.log(cluster); -->
+
+    var nodes = cluster.nodes(data),
+      links = cluster.links(nodes);
+
+    var link = svg.selectAll(".link")
+      .data(links)
+      .enter().append("path")
+      .attr("class", "link")
+      .attr("d", diagonal);
+
+    var node = svg.selectAll(".node")
+      .data(nodes)
+      .enter().append("g")
+      .attr("class", "node")
+      .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; })
+      .on("click", function(d){
+        console.log(show);
+          if (d.children){
+            if (show){
+                toggleVisibility(d, false);
+            }else{
+                toggleVisibility(d, true);
+            }
+          }
+          show = !show;
+      });
+
+    node.append("circle")
+      .attr("r", 4.5);
+      //.style("fill", function(d) { return color(d.name); });
+
+    node.append("text")
+      .attr("dx", function(d) { return d.children ? -8 : 8; })
+      .attr("dy", 3)
+      .style("text-anchor", function(d) { return d.children ? "end" : "start"; })
+      .text(function(d) { return d.name; });
+
+    function toggleVisibility(d, toggle){
+        var children = [];
+        getChildren(d, children);
+
+        svg.selectAll(".node").each(function(n){
+            if (children.indexOf(n) !== -1){
+                d3.select(this).style("display", toggle ? null : "none")
+            }
+        });
+
+        svg.selectAll(".link").each(function(l){
+            if (children.indexOf(l.target) !== -1){
+                d3.select(this).style("display", toggle ? null : "none")
+            }
+        });
+    }
+
+    function getChildren(d, children){
+        if (d.children){
+            d.children.forEach(function(child){
+                children.push(child);
+                getChildren(child, children);
+            });
+        }
+    }
+</script>
+</body>
+</html>
