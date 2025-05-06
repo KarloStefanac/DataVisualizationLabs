@@ -7,6 +7,11 @@
   <script src="http://d3js.org/topojson.v1.min.js"></script>
 </head>
 <body>
+  <style>
+    .zupanija{
+      height: 20px;
+    }
+  </style>
   <script>
     var width = 1000;
     var height = 700;
@@ -18,12 +23,16 @@
     .rotate([-180,0]);
 
     var path = d3.geo.path().projection(projection);
+    var div = d3.select("body").append("div")
+    .attr("class", "zupanija");
 
     var svg = d3.select("body").append("svg")
       .attr("width", width)
-      .attr("height", height);
-    var div = d3.select("body").append("div")
-    .attr("class", "zupanija");
+      .attr("height", height)
+      .call(d3.behavior.zoom().scaleExtent([0.3, 5])
+      .on("zoom", onZoom))
+      .append("g");
+      
     d3.json("cro_regv3.json", function(error, cro) {
         var data = topojson.feature(cro, cro.objects.layer1);
         var states = svg.selectAll("path.county")
@@ -46,6 +55,10 @@
             div.text("");
         })
         });
+
+        function onZoom() {
+                svg.attr( "transform", "translate (" + d3.event.translate + ") scale (" + d3.event.scale + ")" );
+            }
   </script>
 </body>
 </html>

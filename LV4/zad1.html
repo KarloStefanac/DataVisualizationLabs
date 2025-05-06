@@ -46,7 +46,7 @@
       .attr("d", arc);
 
     pieArcs.append("text")
-      .attr("transform", function(d) { return "translate(" + (arc.centroid(d)[0] * 1.2) + "," + (arc.centroid(d)[1] * 1.2) + ") " + "rotate(" + (d.startAngle) + ")"; })
+      .attr("transform", function(d) { return "translate(" + (arc.centroid(d)[0] * 1.2) + "," + (arc.centroid(d)[1] * 1.25) + ") " + "rotate(" + (d.startAngle) + ")"; })
       .attr("text-anchor", "middle")
       .text(function(d) { return d.data.name + ": " + d.value; });
   </script>
