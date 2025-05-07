@@ -1,0 +1,128 @@
+[
+    {
+        "Zupanija_naziv": "ZAGREBACKA",
+        "Vrsta_vozila": "M1",
+        "Benzin": 58064,
+        "Diesel": 100712
+    },
+    {
+        "Zupanija_naziv": "KRAPINSKO-ZAGORSKA",
+        "Vrsta_vozila": "M1",
+        "Benzin": 19708,
+        "Diesel": 39970
+    },
+    {
+        "Zupanija_naziv": "SISACKO-MOSLAVACKA",
+        "Vrsta_vozila": "M1",
+        "Benzin": 17596,
+        "Diesel": 36568
+    },
+    {
+        "Zupanija_naziv": "KARLOVACKA",
+        "Vrsta_vozila": "M1",
+        "Benzin": 20557,
+        "Diesel": 36853
+    },
+    {
+        "Zupanija_naziv": "VARAZDINSKA",
+        "Vrsta_vozila": "M1",
+        "Benzin": 33887,
+        "Diesel": 49563
+    },
+    {
+        "Zupanija_naziv": "KOPRIVNICKO-KRIZEVACKA",
+        "Vrsta_vozila": "M1",
+        "Benzin": 12742,
+        "Diesel": 21574
+    },
+    {
+        "Zupanija_naziv": "BJELOVARSKO-BILOGORSKA",
+        "Vrsta_vozila": "M1",
+        "Benzin": 17323,
+        "Diesel": 37755
+    },
+    {
+        "Zupanija_naziv": "PRIMORSKO-GORANSKA",
+        "Vrsta_vozila": "M1",
+        "Benzin": 70480,
+        "Diesel": 69592
+    },
+    {
+        "Zupanija_naziv": "LICKO-SENJSKA",
+        "Vrsta_vozila": "M1",
+        "Benzin": 6220,
+        "Diesel": 11605
+    },
+    {
+        "Zupanija_naziv": "VIROVITICKO-PODRAVSKA",
+        "Vrsta_vozila": "M1",
+        "Benzin": 10382,
+        "Diesel": 22758
+    },
+    {
+        "Zupanija_naziv": "POZESKO-SLAVONSKA",
+        "Vrsta_vozila": "M1",
+        "Benzin": 9314,
+        "Diesel": 17572
+    },
+    {
+        "Zupanija_naziv": "BRODSKO-POSAVSKA",
+        "Vrsta_vozila": "M1",
+        "Benzin": 19759,
+        "Diesel": 36934
+    },
+    {
+        "Zupanija_naziv": "ZADARSKA",
+        "Vrsta_vozila": "M1",
+        "Benzin": 35918,
+        "Diesel": 44379
+    },
+    {
+        "Zupanija_naziv": "OSJECKO-BARANJSKA",
+        "Vrsta_vozila": "M1",
+        "Benzin": 34106,
+        "Diesel": 65023
+    },
+    {
+        "Zupanija_naziv": "SIBENSKO-KNINSKA",
+        "Vrsta_vozila": "M1",
+        "Benzin": 21882,
+        "Diesel": 24958
+    },
+    {
+        "Zupanija_naziv": "VUKOVARSKO-SRIJEMSKA",
+        "Vrsta_vozila": "M1",
+        "Benzin": 16656,
+        "Diesel": 36255
+    },
+    {
+        "Zupanija_naziv": "SPLITSKO-DALMATINSKA",
+        "Vrsta_vozila": "M1",
+        "Benzin": 88174,
+        "Diesel": 117235
+    },
+    {
+        "Zupanija_naziv": "ISTARSKA",
+        "Vrsta_vozila": "M1",
+        "Benzin": 54689,
+        "Diesel": 60662
+    },
+    {
+        "Zupanija_naziv": "DUBROVACKO-NERETVANSKA",
+        "Vrsta_vozila": "M1",
+        "Benzin": 25016,
+        "Diesel": 32317
+    },
+    {
+        "Zupanija_naziv": "MEDIMURSKA",
+        "Vrsta_vozila": "M1",
+        "Benzin": 21209,
+        "Diesel": 22629
+    },
+    {
+        "Zupanija_naziv": "GRAD ZAGREB",
+        "Vrsta_vozila": "M1",
+        "Benzin": 143238,
+        "Diesel": 205926
+    }
+]

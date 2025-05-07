@@ -11,10 +11,18 @@
     .zupanija{
       height: 20px;
     }
+    .zupanijaClicked{
+      height: 20px;
+    }
   </style>
   <script>
     var width = 1000;
     var height = 700;
+    var data = [];
+    d3.json("vozila.json", function(error, jsonData){
+        data = jsonData;
+    })
+    var color = d3.scale.category20();
 
     var projection = d3.geo.mercator()
     .center([0,10])
@@ -25,6 +33,8 @@
     var path = d3.geo.path().projection(projection);
     var div = d3.select("body").append("div")
     .attr("class", "zupanija");
+    var divClicked = d3.select("body").append("div")
+    .attr("class", "zupanijaClicked");
 
     var svg = d3.select("body").append("svg")
       .attr("width", width)
@@ -41,24 +51,78 @@
         .append("path")
         .attr("class", "county")
         .attr("id", function(d) { return d.id; })
-        .attr("d", path) .style("fill", "#69c3af")
+        .attr("d", path) .style("fill", function(d) { return color(d.id); })
         .style("stroke", "gray")
         .style("stroke-width", 1)
         //.style("fill-opacity", function(){return Math.random();})
         .on("mouseover", function(d) {
-            console.log("works");
-            d3.select(this).style("fill", "#255");
-            div.text(d.properties.name);
+            d3.select(this).style("fill-opacity", "0.5");
+            div.text(d.properties.gn_name + getCountyData(d.properties.gn_name));
           })
         .on("mouseout",function(d){
-            d3.select(this).style("fill", "#69c3af");
+            d3.select(this).style("fill-opacity", "1");
             div.text("");
+        })
+        .on("click", function (d){
+          clicked(d);
         })
         });
 
-        function onZoom() {
+      function onZoom() {
                 svg.attr( "transform", "translate (" + d3.event.translate + ") scale (" + d3.event.scale + ")" );
             }
+
+      function getCountyData(countyName){
+        var benzin = 1;
+          for (var i = 0; i < data.length; i++){
+              if (data[i].Zupanija_naziv.toLowerCase().trim() == countyName.toLowerCase().trim()){
+              console.log(data[i].Zupanija_naziv.toLowerCase());
+              benzin = data[i].Benzin;
+              console.log(benzin);
+              break;
+              }
+          }
+         return '\nBroj prijavljenih benzinaca: ' + benzin;
+      }
+
+      function getCountyDataDiesel(countyName){
+        var dizel = 1;
+          for (var i = 0; i < data.length; i++){
+              if (data[i].Zupanija_naziv.toLowerCase().trim() == countyName.toLowerCase().trim()){
+              console.log(data[i].Zupanija_naziv.toLowerCase());
+              dizel = data[i].Diesel;
+              console.log(dizel);
+              break;
+              }
+          }
+         return '\nBroj prijavljenih dizelasa: ' + dizel;
+      }
+
+      function clicked(d){
+        var centroid = path.centroid(d);
+        var a = centroid[0], b = centroid[1], c = 4, centered = d;
+
+        svg.selectAll("path")
+            .classed("active", centered && function(d) { return d === centered; });
+        svg.transition()
+            .duration(1000)
+            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + c + ")translate(" + -a + "," + -b + ")")
+            .style("stroke-width", 1.5 / c + "px");
+        divClicked.text(getCountyDataDiesel(d.properties.gn_name));
+        a = width / 2;
+        b = height / 2;
+        c= 1;
+        centered = null;
+        svg.transition()
+            .delay(5000)
+            .duration(1000)
+            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + c + ")translate(" + -a + "," + -b + ")")
+            .style("stroke-width", 1.5 / c + "px")
+            .each('end', function () {
+                d3.select(".zupanijaClicked")
+                    .html("");
+        });
+    }
   </script>
 </body>
 </html>
