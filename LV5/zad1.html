@@ -33,7 +33,11 @@
     var path = d3.geo.path().projection(projection);
     var div = d3.select("body").append("div")
     .attr("class", "zupanija");
-    var divClicked = d3.select("body").append("div")
+
+    var h2 = div.append("h2").text("");
+    var p = div.append("p").text("").attr("class", "zupanija");
+
+    var divClicked = d3.select("div.zupanija").append("div")
     .attr("class", "zupanijaClicked");
 
     var svg = d3.select("body").append("svg")
@@ -57,11 +61,13 @@
         //.style("fill-opacity", function(){return Math.random();})
         .on("mouseover", function(d) {
             d3.select(this).style("fill-opacity", "0.5");
-            div.text(d.properties.gn_name + getCountyData(d.properties.gn_name));
+            h2.text(d.properties.gn_name);
+            p.text(getCountyData(d.properties.gn_name));
           })
         .on("mouseout",function(d){
             d3.select(this).style("fill-opacity", "1");
-            div.text("");
+            h2.text("");
+            p.text("");
         })
         .on("click", function (d){
           clicked(d);
@@ -108,7 +114,7 @@
             .duration(1000)
             .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + c + ")translate(" + -a + "," + -b + ")")
             .style("stroke-width", 1.5 / c + "px");
-        divClicked.text(getCountyDataDiesel(d.properties.gn_name));
+        divClicked.text(getCountyDataDiesel(d.properties.gn_name) + ", " + getCountyData(d.properties.gn_name));
         a = width / 2;
         b = height / 2;
         c= 1;
